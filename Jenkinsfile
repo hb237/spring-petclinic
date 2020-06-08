@@ -7,8 +7,7 @@ pipeline {
     stages {
         stage ('Build') {
             steps {
-                sh 'mvn -DskipTests install' 
-                sh 'java -jar target/*.jar'
+                sh 'mvn install' 
             }
         }
     }
