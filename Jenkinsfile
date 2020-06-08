@@ -1,9 +1,22 @@
 pipeline {
-    agent any 
+    agent any
+    tools { 
+        maven 'Maven 3.3.9' 
+        jdk 'jdk8' 
+    }
     stages {
-        stage('Build Jar') { 
+        stage ('Initialize') {
             steps {
-                sh 'mvn -B -DskipTests clean package' 
+                sh '''
+                    echo "PATH = ${PATH}"
+                    echo "M2_HOME = ${M2_HOME}"
+                ''' 
+            }
+        }
+
+        stage ('Build') {
+            steps {
+                echo 'This is a minimal pipeline.'
             }
         }
     }
