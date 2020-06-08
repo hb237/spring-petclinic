@@ -1,17 +1,24 @@
 pipeline {
-  agent {
-    docker {
-      image 'maven:3-alpine'
-      args '-v /root/.m2:/root/.m2'
+agent any
+stages {
+    stage('Clone') {
+        steps {
+            git branch: 'master', url: 'https://github.com/lvthillo/maven-hello-world.git'
+            stash name:'scm', includes:'*'
+        }
     }
 
-  }
-  stages {
-    stage('Build') {
-      steps {
-        sh 'sh \'mvn -B -DskipTests clean package\''
-      }
+    stage('Build in Docker') {
+        steps {
+            unstash 'scm'
+            script{
+                docker.image('maven:3.5.2').inside{ 
+                    sh 'pwd'
+                    sh 'mvn -v'
+                    sh 'mvn clean install'
+                }
+            }
+        }
     }
-
-  }
+}
 }
