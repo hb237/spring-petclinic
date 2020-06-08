@@ -14,7 +14,7 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 script {
-                    docker.build("h8a1/spring-petclinice:${env.BUILD_ID}")
+                    sh'java -jar target/*.jar'
                 }
             }
         }
