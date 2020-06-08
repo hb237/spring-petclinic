@@ -6,15 +6,16 @@ pipeline {
         }
     }
     stages {
-        stage('Build') { 
+        stage('Build Jar') { 
             steps {
                 sh 'mvn -B -Dcheckstyle.skip -DskipTests clean package' 
             }
         }
-        stage('Deploy') {
+        stage('Build Docker Image') {
             steps {
-                sh 'docker build -tag h8a1/spring-petclinic'
-                sh 'docker run --publish 8000:8080 --detach h8a1/spring-petclinic'
+                script {
+                     docker.build h8a1/spring-petclinic + ":$BUILD_NUMBER"
+                }
             }
         }
     }
