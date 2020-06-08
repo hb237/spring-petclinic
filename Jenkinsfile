@@ -8,14 +8,7 @@ pipeline {
     stages {
         stage('Build Jar') { 
             steps {
-                sh 'mvn -B -Dcheckstyle.skip -DskipTests clean package' 
-            }
-        }
-        stage('Build Docker Image') {
-            steps {
-                script {
-                    sh 'echo egal'
-                }
+                sh 'mvn -B -DskipTests clean package' 
             }
         }
     }
