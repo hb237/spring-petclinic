@@ -9,8 +9,12 @@ pipeline {
         stage('Build') { 
             steps {
                 sh 'mvn -B -Dcheckstyle.skip -DskipTests clean package' 
-                sh 'pwd'
-                sh 'ls'
+            }
+        }
+        stage('Deploy') {
+            steps {
+                sh 'docker build -tag h8a1/spring-petclinic'
+                sh 'docker run --publish 8000:8080 --detach h8a1/spring-petclinic'
             }
         }
     }
