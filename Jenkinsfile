@@ -3,7 +3,7 @@ agent any
 stages {
     stage('Clone') {
         steps {
-            git branch: 'master', url: 'https://github.com/lvthillo/maven-hello-world.git'
+            git branch: 'master', url: 'https://github.com/hb237/spring-petclinic.git'
             stash name:'scm', includes:'*'
         }
     }
