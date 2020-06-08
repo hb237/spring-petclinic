@@ -8,6 +8,8 @@ pipeline {
         stage ('Build') {
             steps {
                 sh 'mvn -DskipTests install' 
+                sh 'pwd'
+                sh 'ls'
             }
         }
     }
